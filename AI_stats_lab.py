@@ -180,25 +180,33 @@ def uniform_histogram_analysis(a_values,
         )
     """
     results = []
+
     for a, b in zip(a_values, b_values):
-        data = np.random.uniform(a, b, n_samples)
-        sample_mean = np.mean(data)
+        samples = np.random.uniform(a, b, n_samples)
+
+        sample_mean = np.mean(samples)
         theoretical_mean = uniform_mean(a, b)
         mean_error = abs(sample_mean - theoretical_mean)
 
-        sample_variance = np.var(data)
+        sample_variance = np.var(samples)
         theoretical_variance = uniform_variance(a, b)
         variance_error = abs(sample_variance - theoretical_variance)
 
-        results.append((a, b,
-                        sample_mean, theoretical_mean, mean_error,
-                        sample_variance, theoretical_variance, variance_error))
-
-        plt.hist(data, bins=bins, density=True, alpha=0.6, color='green')
-        plt.title(f"Uniform Distribution a={a}, b={b}")
-        plt.show()
+        results.append(
+            (
+                a,
+                b,
+                sample_mean,
+                theoretical_mean,
+                mean_error,
+                sample_variance,
+                theoretical_variance,
+                variance_error
+            )
+        )
 
     return results
+
 
 if __name__ == "__main__":
     print("Implement all required functions.")
